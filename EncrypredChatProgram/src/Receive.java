@@ -16,6 +16,11 @@ public class Receive extends Thread {
   }
 
 
+  public Stack<String> getStack(){
+    return messageStack;
+  }
+
+
 
   public void run() {
     while (true) {
@@ -29,8 +34,6 @@ public class Receive extends Thread {
         }else{
           messageStack.push(currentMessage);
         }
-
-
 
       } catch (IOException e) {
         e.printStackTrace();
