@@ -43,7 +43,9 @@ public class BackEnd {
     timer.schedule(new TimerTask() {
       @Override
       public void run() {
-
+        sockArray=lSoc.getSocketArray();
+        senderArray=lSoc.getSendArray();
+        receiverArray=lSoc.getRecArray();
       }
     },0,1000);
 
