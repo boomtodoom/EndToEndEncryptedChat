@@ -42,19 +42,21 @@ public class Receive extends Thread {
   * Method runs repetedly due to loop. It listens for a message and will save it in the stack
    */
   public void run() {
-    int msgCount=0;
+
+    int msgCount=1;
     while (true) {
 
       try {
 
         currentMessage = input.readUTF();
         if(!currentMessage.isEmpty()){
-          msgCount=1;
+
           if(msgCount==1){
             while(currentMessage!="END:DATA:SEND"){
               currentMessage=input.readUTF();
               String[] splitMsg = currentMessage.split(" ");
               Socket sock = new Socket(InetAddress.getByName(splitMsg[0]),Integer.valueOf(splitMsg[1]));
+              msgCount++;
             }
           }
           messageQueue.add(currentMessage);

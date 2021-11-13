@@ -4,8 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a13c6f2e-c22b-4cac-9332-68ad4f3f8b43" name="Changes" comment="Done some stuff">
+    <list default="true" id="8c3fdb8e-701d-4bcc-9087-779ad6372228" name="Changes" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BackEnd.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Receive.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Receive.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Encryption.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/FrontEnd.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Receive.class" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Send.class" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,14 +177,7 @@
       <option name="project" value="LOCAL" />
       <updated>1636831852095</updated>
     </task>
-    <task id="LOCAL-00014" summary="Done some stuff">
-      <created>1636843822885</created>
-      <option name="number" value="00014" />
-      <option name="presentableId" value="LOCAL-00014" />
-      <option name="project" value="LOCAL" />
-      <updated>1636843822886</updated>
-    </task>
-    <option name="localTasksCounter" value="15" />
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -203,7 +202,6 @@
     <MESSAGE value="Added new thread class that will creat a new socket when someone new connects using your IP." />
     <MESSAGE value="Fixed sams stupid error part 100" />
     <MESSAGE value="Fixed sams stupid error part 101" />
-    <MESSAGE value="Done some stuff" />
-    <option name="LAST_COMMIT_MESSAGE" value="Done some stuff" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed sams stupid error part 101" />
   </component>
 </project>
