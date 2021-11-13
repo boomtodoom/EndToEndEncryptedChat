@@ -11,25 +11,25 @@ public class BackEnd {
 
 
   public static void main(String[] args) throws IOException {
-    Scanner scan = new Scanner(System.in);
-    System.out.println("Please enter the ip you wish to connect to: ");
-    String ip = scan.nextLine();
-    InetAddress iAddress = InetAddress.getByName(ip);
-    System.out.println("Please enter the port you wish to connect to: ");
-    int port = scan.nextInt();
-    Socket socket = new Socket(iAddress, port);
-    System.out.println("Please enter a port you want open");
-    int openPort = scan.nextInt();
+      Scanner scan = new Scanner(System.in);
+      System.out.println("Please enter the ip you wish to connect to: ");
+      String ip = scan.nextLine();
+      InetAddress iAddress = InetAddress.getByName(ip);
+      System.out.println("Please enter the port you wish to connect to: ");
+      int port = scan.nextInt();
+      Socket socket = new Socket(iAddress, port);
+      System.out.println("Please enter a port you want open");
+      int openPort = scan.nextInt();
+     //poopoo pee pee
 
+      ServerSocket sSoc = new ServerSocket(openPort);
+      Socket newSoc = sSoc.accept();
 
-    ServerSocket sSoc = new ServerSocket(openPort);
-    Socket newSoc = sSoc.accept();
-
-    Send initMsg = new Send(socket);
-    System.out.println("Please enter your desired username");
-    String uName = scan.nextLine();
-    initMsg.send("INIT::"+uName); // remove dogshit code
-    //Receive list of sockets
+      Send initMsg = new Send(socket);
+      System.out.println("Please enter your desired username");
+      String uName = scan.nextLine();
+      initMsg.send("INIT::"+uName); // remove dogshit code
+      //Receive list of sockets
 
 
 
