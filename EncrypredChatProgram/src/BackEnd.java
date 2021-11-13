@@ -5,6 +5,8 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class BackEnd {
   private ArrayList<Socket> sockArray = new ArrayList<>();
@@ -36,6 +38,14 @@ public class BackEnd {
     ServerSocket sSoc = new ServerSocket(openPort);
     ListenSocCraft lSoc = new ListenSocCraft(sSoc,sockArray); //add server socket
     lSoc.start();
+
+    Timer timer = new Timer();
+    timer.schedule(new TimerTask() {
+      @Override
+      public void run() {
+
+      }
+    },0,1000);
 
     /**
      * Loops infinitely checking for the users message and then sending them to all connected clients
