@@ -5,11 +5,13 @@ import java.net.Socket;
 import java.net.UnknownHostException;
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class BackEnd {
   private ArrayList<Socket> sockArray = new ArrayList<>();
   private ArrayList<Send> senderArray = new ArrayList<>();
-
+  private ArrayList<Receive> receiverArray = new ArrayList<>();
 
   public static void main(String[] args) throws IOException {
     BackEnd back = new BackEnd();
@@ -34,8 +36,16 @@ public class BackEnd {
     System.out.println("Please enter a port you want open");
     int openPort = scan.nextInt();
     ServerSocket sSoc = new ServerSocket(openPort);
-    ListenSocCraft lSoc = new ListenSocCraft(sSoc,sockArray, senderArray); //add server socket
+    ListenSocCraft lSoc = new ListenSocCraft(sSoc,sockArray,senderArray); //add server socket
     lSoc.start();
+
+    Timer timer = new Timer();
+    timer.schedule(new TimerTask() {
+      @Override
+      public void run() {
+
+      }
+    },0,1000);
 
     /**
      * Loops infinitely checking for the users message and then sending them to all connected clients
