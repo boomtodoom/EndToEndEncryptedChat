@@ -4,8 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a13c6f2e-c22b-4cac-9332-68ad4f3f8b43" name="Changes" comment="Added new thread class that will creat a new socket when someone new connects using your IP.">
+    <list default="true" id="a13c6f2e-c22b-4cac-9332-68ad4f3f8b43" name="Changes" comment="FIxed dilans mistake and added start to statr">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/BackEnd.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/ListenSocCraft.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ListenSocCraft.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -142,7 +144,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636829945673</updated>
     </task>
-    <option name="localTasksCounter" value="12" />
+    <task id="LOCAL-00012" summary="FIxed dilans mistake and added start to statr">
+      <created>1636830265671</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1636830265671</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -165,6 +174,7 @@
     <MESSAGE value="Fixed sams stupid error pt3" />
     <MESSAGE value="Added a socket Listner thread class that accepts new connections from peaople" />
     <MESSAGE value="Added new thread class that will creat a new socket when someone new connects using your IP." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added new thread class that will creat a new socket when someone new connects using your IP." />
+    <MESSAGE value="FIxed dilans mistake and added start to statr" />
+    <option name="LAST_COMMIT_MESSAGE" value="FIxed dilans mistake and added start to statr" />
   </component>
 </project>

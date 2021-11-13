@@ -34,7 +34,7 @@ public class BackEnd {
     System.out.println("Please enter a port you want open");
     int openPort = scan.nextInt();
     ServerSocket sSoc = new ServerSocket(openPort);
-    ListenSocCraft lSoc = new ListenSocCraft(sSoc,sockArray); //add server socket
+    ListenSocCraft lSoc = new ListenSocCraft(sSoc,sockArray, senderArray); //add server socket
     lSoc.start();
 
     /**
