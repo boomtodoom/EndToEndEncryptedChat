@@ -1,14 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="a13c6f2e-c22b-4cac-9332-68ad4f3f8b43" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/BackEnd.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Encryption.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/FrontEnd.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Receive.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Send.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/EncrypredChatProgram.iml" beforeDir="false" afterPath="$PROJECT_DIR$/EncrypredChatProgram.iml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Test.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BackEnd.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -24,6 +22,14 @@
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="GitSEFilterConfiguration">
+    <file-type-list>
+      <filtered-out-file-type name="LOCAL_BRANCH" />
+      <filtered-out-file-type name="REMOTE_BRANCH" />
+      <filtered-out-file-type name="TAG" />
+      <filtered-out-file-type name="COMMIT_BY_MESSAGE" />
+    </file-type-list>
   </component>
   <component name="ProjectId" id="20ro5xU6be81pzpalPlYxSrBYlJ" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
