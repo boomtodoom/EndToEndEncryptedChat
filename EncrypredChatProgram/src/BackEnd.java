@@ -21,6 +21,7 @@ public class BackEnd {
     System.out.println("Please enter a port you want open");
     int openPort = scan.nextInt();
 
+
     ServerSocket sSoc = new ServerSocket(openPort);
     Socket newSoc = sSoc.accept();
 
