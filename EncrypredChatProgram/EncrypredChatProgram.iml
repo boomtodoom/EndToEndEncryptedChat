@@ -17,5 +17,35 @@
     <orderEntry type="library" name="spring.core" level="project" />
     <orderEntry type="library" name="spring.context" level="project" />
     <orderEntry type="library" name="spring.aop" level="project" />
+    <orderEntry type="library" name="Maven: org.no-hope:springapp:0.2.3" level="project" />
+    <orderEntry type="library" name="Maven: org.no-hope:jsr305-aspectj-validation:0.2.3" level="project" />
+    <orderEntry type="library" name="Maven: com.google.code.findbugs:jsr305:3.0.0" level="project" />
+    <orderEntry type="library" name="Maven: org.aspectj:aspectjrt:1.8.5" level="project" />
+    <orderEntry type="library" name="Maven: org.no-hope:springtools:0.2.3" level="project" />
+    <orderEntry type="library" name="Maven: org.no-hope:typetools:0.2.3" level="project" />
+    <orderEntry type="library" name="Maven: org.no-hope:reflection:0.2.3" level="project" />
+    <orderEntry type="library" name="Maven: com.google.guava:guava:18.0" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.commons:commons-lang3:3.4" level="project" />
+    <orderEntry type="library" name="Maven: joda-time:joda-time:2.7" level="project" />
+    <orderEntry type="library" name="Maven: net.jcip:jcip-annotations:1.0" level="project" />
+    <orderEntry type="library" name="Maven: org.no-hope:typetools-json:0.2.3" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.5.3" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.5.3" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.5.3" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.datatype:jackson-datatype-joda:2.5.3" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-context:3.2.4.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-aop:3.2.4.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: aopalliance:aopalliance:1.0" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-beans:3.2.4.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-core:3.2.4.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.springframework:spring-expression:3.2.4.RELEASE" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:jcl-over-slf4j:1.7.7" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.7" level="project" />
+    <orderEntry type="library" name="Maven: javax.inject:javax.inject:1" level="project" />
+    <orderEntry type="library" name="Maven: org.no-hope:apptools:0.2.3" level="project" />
+    <orderEntry type="library" name="Maven: org.no-hope:slf4j-logging:0.2.3" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.xbean:xbean-finder:3.16" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.xbean:xbean-bundleutils:3.16" level="project" />
+    <orderEntry type="library" name="Maven: org.apache.xbean:xbean-asm-util:3.16" level="project" />
   </component>
 </module>
