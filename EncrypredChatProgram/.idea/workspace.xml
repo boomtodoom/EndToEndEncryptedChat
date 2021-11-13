@@ -4,11 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a13c6f2e-c22b-4cac-9332-68ad4f3f8b43" name="Changes" comment="Fixed sams stupid error part 100">
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+    <list default="true" id="a13c6f2e-c22b-4cac-9332-68ad4f3f8b43" name="Changes" comment="Fixed sams stupid error part 102">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BackEnd.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/ListenSocCraft.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ListenSocCraft.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/Receive.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Receive.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/BackEnd.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/BackEnd.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/classes/Receive.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Receive.class" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -50,14 +52,29 @@
     <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
-    <property name="project.structure.last.edited" value="Libraries" />
+    <property name="project.structure.last.edited" value="Artifacts" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="project.structure.side.proportion" value="0.2" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\dylan\Documents\GitHub\EndToEndEncryptedChat\EncrypredChatProgram\src" />
     </key>
+  </component>
+  <component name="RunManager">
+    <configuration name="BackEnd" type="Application" factoryName="Application" singleton="false" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="BackEnd" />
+      <module name="EncrypredChatProgram" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Application.BackEnd" />
+      </list>
+    </recent_temporary>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -152,7 +169,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636830888434</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="Fixed sams stupid error part 101">
+      <created>1636831852095</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1636831852095</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -176,6 +200,7 @@
     <MESSAGE value="Added a socket Listner thread class that accepts new connections from peaople" />
     <MESSAGE value="Added new thread class that will creat a new socket when someone new connects using your IP." />
     <MESSAGE value="Fixed sams stupid error part 100" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed sams stupid error part 100" />
+    <MESSAGE value="Fixed sams stupid error part 101" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed sams stupid error part 101" />
   </component>
 </project>

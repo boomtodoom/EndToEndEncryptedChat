@@ -1,3 +1,5 @@
+import java.io.BufferedOutputStream;
+import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -46,10 +48,11 @@ public class ListenSocCraft extends Thread{
    * @param arrList
    * @param sendArray
    */
-  public ListenSocCraft(ServerSocket servSoc, ArrayList<Socket> arrList, ArrayList<Send> sendArray ){ // perhaps need to guve it a recuver array as well??
+  public ListenSocCraft(ServerSocket servSoc, ArrayList<Socket> arrList, ArrayList<Send> sendArray, ArrayList<Receive> receiverArr ){ // perhaps need to guve it a recuver array as well??
     this.socketArray = arrList;
     this.servSoc = servSoc;
-
+    this.sendArray = sendArray;
+    this.recArray=receiverArr;
   }
 
   /**
@@ -64,9 +67,14 @@ public class ListenSocCraft extends Thread{
         socketArray.add(newSoc);
         Send newSender = new Send(newSoc);
         sendArray.add(newSender);
-        Receive reciver = new Receive(newSoc);
-        recArray.add(reciver);
-
+        Receive receiver = new Receive(newSoc);
+        recArray.add(receiver);
+        receiver.start();
+        DataOutputStream out = new DataOutputStream(newSoc.getOutputStream());
+        for(int i=0; i<socketArray.size();i++){
+          out.writeUTF(socketArray.get(i).getInetAddress().toString()+" "+socketArray.get(i).getPort());
+        }
+        out.writeUTF("END:DATA:SEND");
 
       } catch (IOException e) {
         e.printStackTrace();
