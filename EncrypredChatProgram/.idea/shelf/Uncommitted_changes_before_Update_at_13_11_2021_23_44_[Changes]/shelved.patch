@@ -1,0 +1,172 @@
+Index: src/BackEnd.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.io.IOException;\r\nimport java.net.InetAddress;\r\nimport java.net.ServerSocket;\r\nimport java.net.Socket;\r\nimport java.util.ArrayList;\r\nimport java.util.LinkedList;\r\nimport java.util.Locale;\r\nimport java.util.Queue;\r\nimport java.util.Scanner;\r\nimport java.util.Timer;\r\nimport java.util.TimerTask;\r\n\r\npublic class BackEnd {\r\n  private ArrayList<Socket> sockArray = new ArrayList<>();\r\n  private ArrayList<Send> senderArray = new ArrayList<>();\r\n  private ArrayList<Receive> receiverArray = new ArrayList<>();\r\n  private Queue<String> messageQueue = new LinkedList<>();\r\n\r\n  public static void main(String[] args) throws IOException {\r\n    BackEnd back = new BackEnd();\r\n    back.initialise();\r\n  }\r\n\r\n  public void initialise() throws IOException {\r\n    /**\r\n     * Gets the port and ip of the client to connect to and then creates a socket\r\n     */\r\n    Scanner scan = new Scanner(System.in);\r\n    System.out.println(\"Do you want to join a server that already exists(y/n)? \");\r\n    String choice = scan.nextLine().toLowerCase(Locale.ROOT);\r\n    if(choice.equals(\"y\")) {\r\n      System.out.println(\"Please enter the ip you wish to connect to: \");\r\n      String ip = scan.nextLine();\r\n      InetAddress iAddress = InetAddress.getByName(ip);\r\n      System.out.println(\"Please enter the port you wish to connect to: \");\r\n      int port = scan.nextInt();\r\n      Socket socket = new Socket(iAddress, port);\r\n      senderArray.add(new Send(socket));\r\n      Receive rec = new Receive(socket);\r\n      rec.start();\r\n      receiverArray.add(rec);\r\n\r\n      sockArray.add(socket);\r\n    } else {\r\n      System.out.println(\"Starting chatroom...\");\r\n    }\r\n\r\n    /**\r\n     * Starts a thread that creates new sockets every time a user connects to this client\r\n     */\r\n    System.out.println(\"Please enter a port you want open\");\r\n    int openPort = scan.nextInt();\r\n    ServerSocket sSoc = new ServerSocket(openPort);\r\n    ListenSocCraft lSoc = new ListenSocCraft(sSoc,sockArray,senderArray,receiverArray); //add server socket\r\n    lSoc.start();\r\n    //Receive rec = new Receive(sSoc);\r\n\r\n    Timer timer = new Timer();\r\n    timer.schedule(new TimerTask() {\r\n      @Override\r\n      public void run() {\r\n        sockArray = lSoc.getSocketArray();\r\n        senderArray =  lSoc.getSendArray();\r\n        receiverArray =  lSoc.getRecArray();\r\n        //messageQueue = rec.getQueue();\r\n        for(Receive receiver:receiverArray){\r\n          for(String msg:receiver.getQueue()){\r\n            System.out.println(msg);\r\n            receiver.getQueue().remove(msg);\r\n\r\n          }\r\n        }\r\n      }\r\n    },1000,1000);\r\n\r\n    /**\r\n     * Loops infinitely checking for the users message and then sending them to all connected clients\r\n     */\r\n    while(true){\r\n      System.out.println(\"Please enter the message: \");\r\n      String message = scan.nextLine();\r\n      System.out.println(senderArray.size());\r\n      System.out.println(\"Sending: \"+message);\r\n      for(int i=0; i<senderArray.size();i++){\r\n        senderArray.get(i).send(message);\r\n      }\r\n    }\r\n    /**\r\n     *\r\n     */\r\n  }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/BackEnd.java b/src/BackEnd.java
+--- a/src/BackEnd.java	(revision ec0219d306f21adbd735318be6d10313b473a927)
++++ b/src/BackEnd.java	(date 1636844573569)
+@@ -2,10 +2,8 @@
+ import java.net.InetAddress;
+ import java.net.ServerSocket;
+ import java.net.Socket;
++import java.net.UnknownHostException;
+ import java.util.ArrayList;
+-import java.util.LinkedList;
+-import java.util.Locale;
+-import java.util.Queue;
+ import java.util.Scanner;
+ import java.util.Timer;
+ import java.util.TimerTask;
+@@ -14,7 +12,6 @@
+   private ArrayList<Socket> sockArray = new ArrayList<>();
+   private ArrayList<Send> senderArray = new ArrayList<>();
+   private ArrayList<Receive> receiverArray = new ArrayList<>();
+-  private Queue<String> messageQueue = new LinkedList<>();
+ 
+   public static void main(String[] args) throws IOException {
+     BackEnd back = new BackEnd();
+@@ -26,52 +23,29 @@
+      * Gets the port and ip of the client to connect to and then creates a socket
+      */
+     Scanner scan = new Scanner(System.in);
+-    System.out.println("Do you want to join a server that already exists(y/n)? ");
+-    String choice = scan.nextLine().toLowerCase(Locale.ROOT);
+-    if(choice.equals("y")) {
+-      System.out.println("Please enter the ip you wish to connect to: ");
+-      String ip = scan.nextLine();
+-      InetAddress iAddress = InetAddress.getByName(ip);
+-      System.out.println("Please enter the port you wish to connect to: ");
+-      int port = scan.nextInt();
+-      Socket socket = new Socket(iAddress, port);
+-      senderArray.add(new Send(socket));
+-      Receive rec = new Receive(socket);
+-      rec.start();
+-      receiverArray.add(rec);
+-
+-      sockArray.add(socket);
+-    } else {
+-      System.out.println("Starting chatroom...");
+-    }
+-
++    System.out.println("Please enter the ip you wish to connect to: ");
++    String ip = scan.nextLine();
++    InetAddress iAddress = InetAddress.getByName(ip);
++    System.out.println("Please enter the port you wish to connect to: ");
++    int port = scan.nextInt();
++    Socket socket = new Socket(iAddress, port);
++    sockArray.add(socket);
+     /**
+      * Starts a thread that creates new sockets every time a user connects to this client
+      */
+     System.out.println("Please enter a port you want open");
+     int openPort = scan.nextInt();
+     ServerSocket sSoc = new ServerSocket(openPort);
+-    ListenSocCraft lSoc = new ListenSocCraft(sSoc,sockArray,senderArray,receiverArray); //add server socket
++    ListenSocCraft lSoc = new ListenSocCraft(sSoc,sockArray,senderArray); //add server socket
+     lSoc.start();
+-    //Receive rec = new Receive(sSoc);
+ 
+     Timer timer = new Timer();
+     timer.schedule(new TimerTask() {
+       @Override
+       public void run() {
+-        sockArray = lSoc.getSocketArray();
+-        senderArray =  lSoc.getSendArray();
+-        receiverArray =  lSoc.getRecArray();
+-        //messageQueue = rec.getQueue();
+-        for(Receive receiver:receiverArray){
+-          for(String msg:receiver.getQueue()){
+-            System.out.println(msg);
+-            receiver.getQueue().remove(msg);
+ 
+-          }
+-        }
+       }
+-    },1000,1000);
++    },0,1000);
+ 
+     /**
+      * Loops infinitely checking for the users message and then sending them to all connected clients
+@@ -79,8 +53,6 @@
+     while(true){
+       System.out.println("Please enter the message: ");
+       String message = scan.nextLine();
+-      System.out.println(senderArray.size());
+-      System.out.println("Sending: "+message);
+       for(int i=0; i<senderArray.size();i++){
+         senderArray.get(i).send(message);
+       }
+Index: src/Receive.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.io.BufferedInputStream;\r\nimport java.io.DataInputStream;\r\nimport java.io.IOException;\r\nimport java.net.InetAddress;\r\nimport java.net.Socket;\r\nimport java.util.LinkedList;\r\nimport java.util.Queue;\r\nimport java.util.Stack;\r\nimport javax.xml.crypto.Data;\r\n\r\n\r\n/**\r\n * class is a thread that is run for each connection that is made.\r\n * It listens for incoming messages and saves them in a socket\r\n */\r\n\r\npublic class Receive extends Thread {\r\n  private Socket clientSocket;\r\n  private DataInputStream input;\r\n  private String currentMessage = null;\r\n  private Queue<String> messageQueue = new LinkedList<>();\r\n\r\n  /**\r\n  * Constructior taks a socket\r\n   * */\r\n  public Receive(Socket sock) throws IOException {\r\n    clientSocket = sock;\r\n    input = new DataInputStream(new BufferedInputStream(sock.getInputStream()));\r\n  }\r\n\r\n  /**\r\n  * Getter grabs socket queue\r\n   */\r\n  public Queue<String> getQueue(){\r\n    return messageQueue;\r\n  }\r\n\r\n  private void clearQueue(){\r\n    messageQueue.clear();\r\n  }\r\n  /**\r\n  * Method runs repetedly due to loop. It listens for a message and will save it in the stack\r\n   */\r\n  public void run() {\r\n    int msgCount=0;\r\n    while (true) {\r\n\r\n      try {\r\n\r\n        currentMessage = input.readUTF();\r\n        if(!currentMessage.isEmpty()){\r\n          msgCount=1;\r\n          if(msgCount==1){\r\n            while(currentMessage!=\"END:DATA:SEND\"){\r\n              currentMessage=input.readUTF();\r\n              String[] splitMsg = currentMessage.split(\" \");\r\n              Socket sock = new Socket(InetAddress.getByName(splitMsg[0]),Integer.valueOf(splitMsg[1]));\r\n            }\r\n          }\r\n          messageQueue.add(currentMessage);\r\n          currentMessage=null;\r\n          System.out.println(\"Message recd\");\r\n        }\r\n\r\n      } catch (IOException e) {\r\n        e.printStackTrace();\r\n      }\r\n\r\n\r\n    }\r\n\r\n  }\r\n\r\n\r\n}\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Receive.java b/src/Receive.java
+--- a/src/Receive.java	(revision ec0219d306f21adbd735318be6d10313b473a927)
++++ b/src/Receive.java	(date 1636844817963)
+@@ -42,19 +42,21 @@
+   * Method runs repetedly due to loop. It listens for a message and will save it in the stack
+    */
+   public void run() {
+-    int msgCount=0;
++
++    int msgCount=1;
+     while (true) {
+ 
+       try {
+ 
+         currentMessage = input.readUTF();
+         if(!currentMessage.isEmpty()){
+-          msgCount=1;
++
+           if(msgCount==1){
+             while(currentMessage!="END:DATA:SEND"){
+               currentMessage=input.readUTF();
+               String[] splitMsg = currentMessage.split(" ");
+               Socket sock = new Socket(InetAddress.getByName(splitMsg[0]),Integer.valueOf(splitMsg[1]));
++              msgCount++;
+             }
+           }
+           messageQueue.add(currentMessage);
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"a13c6f2e-c22b-4cac-9332-68ad4f3f8b43\" name=\"Changes\" comment=\"Fixed sams stupid error part 102\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/BackEnd.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/BackEnd.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/ListenSocCraft.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/ListenSocCraft.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/Receive.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/Receive.java\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/target/classes/BackEnd.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/target/classes/BackEnd.class\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/target/classes/Receive.class\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/target/classes/Receive.class\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$/..\" />\r\n  </component>\r\n  <component name=\"GitSEFilterConfiguration\">\r\n    <file-type-list>\r\n      <filtered-out-file-type name=\"LOCAL_BRANCH\" />\r\n      <filtered-out-file-type name=\"REMOTE_BRANCH\" />\r\n      <filtered-out-file-type name=\"TAG\" />\r\n      <filtered-out-file-type name=\"COMMIT_BY_MESSAGE\" />\r\n    </file-type-list>\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"20ro5xU6be81pzpalPlYxSrBYlJ\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n    <option name=\"showMembers\" value=\"true\" />\r\n    <option name=\"showVisibilityIcons\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"Downloaded.Files.Path.Enabled\" value=\"false\" />\r\n    <property name=\"Repository.Attach.Annotations\" value=\"false\" />\r\n    <property name=\"Repository.Attach.JavaDocs\" value=\"false\" />\r\n    <property name=\"Repository.Attach.Sources\" value=\"false\" />\r\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\r\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\r\n    <property name=\"SHARE_PROJECT_CONFIGURATION_FILES\" value=\"true\" />\r\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$\" />\r\n    <property name=\"project.structure.last.edited\" value=\"Artifacts\" />\r\n    <property name=\"project.structure.proportion\" value=\"0.15\" />\r\n    <property name=\"project.structure.side.proportion\" value=\"0.2\" />\r\n    <property name=\"settings.editor.selected.configurable\" value=\"preferences.lookFeel\" />\r\n  </component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\dylan\\Documents\\GitHub\\EndToEndEncryptedChat\\EncrypredChatProgram\\src\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"RunManager\">\r\n    <configuration name=\"BackEnd\" type=\"Application\" factoryName=\"Application\" singleton=\"false\" temporary=\"true\" nameIsGenerated=\"true\">\r\n      <option name=\"MAIN_CLASS_NAME\" value=\"BackEnd\" />\r\n      <module name=\"EncrypredChatProgram\" />\r\n      <method v=\"2\">\r\n        <option name=\"Make\" enabled=\"true\" />\r\n      </method>\r\n    </configuration>\r\n    <recent_temporary>\r\n      <list>\r\n        <item itemvalue=\"Application.BackEnd\" />\r\n      </list>\r\n    </recent_temporary>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"a13c6f2e-c22b-4cac-9332-68ad4f3f8b43\" name=\"Changes\" comment=\"\" />\r\n      <created>1636811888084</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1636811888084</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"Added main method\">\r\n      <created>1636812864282</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1636812864282</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"Created basic send class with a constructor that takes the socket in and initialises an output stream, and a method that sends a message through the output stream.\">\r\n      <created>1636814719297</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1636814719297</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"Fixed sams stupid error\">\r\n      <created>1636819192866</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1636819192866</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"Fixed sams stupid error pt2\">\r\n      <created>1636819494867</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1636819494867</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"Fixed sams stupid error pt3\">\r\n      <created>1636822320541</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1636822320541</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"Added thread into  recever class that grabs messages and stores them in a stack.\">\r\n      <created>1636825320187</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1636825320187</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"Added a socket Listner thread class that accepts new connections from peaople\">\r\n      <created>1636826274799</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1636826274799</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"Added a socket Listner thread class that accepts new connections from peaople\">\r\n      <created>1636826429454</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1636826429454</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"Added a socket Listner thread class that accepts new connections from peaople\">\r\n      <created>1636826665290</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1636826665290</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00010\" summary=\"Added a socket Listner thread class that accepts new connections from peaople\">\r\n      <created>1636826734431</created>\r\n      <option name=\"number\" value=\"00010\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1636826734431</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00011\" summary=\"Added new thread class that will creat a new socket when someone new connects using your IP.\">\r\n      <created>1636829945673</created>\r\n      <option name=\"number\" value=\"00011\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00011\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1636829945673</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00012\" summary=\"Fixed sams stupid error part 100\">\r\n      <created>1636830888434</created>\r\n      <option name=\"number\" value=\"00012\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00012\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1636830888434</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00013\" summary=\"Fixed sams stupid error part 101\">\r\n      <created>1636831852095</created>\r\n      <option name=\"number\" value=\"00013\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00013\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1636831852095</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"14\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Added main method\" />\r\n    <MESSAGE value=\"Created basic send class with a constructor that takes the socket in and initialises an output stream, and a method that sends a message through the output stream.\" />\r\n    <MESSAGE value=\"Fixed sams stupid error\" />\r\n    <MESSAGE value=\"Fixed sams stupid error pt2\" />\r\n    <MESSAGE value=\"Fixed sams stupid error pt3\" />\r\n    <MESSAGE value=\"Added a socket Listner thread class that accepts new connections from peaople\" />\r\n    <MESSAGE value=\"Added new thread class that will creat a new socket when someone new connects using your IP.\" />\r\n    <MESSAGE value=\"Fixed sams stupid error part 100\" />\r\n    <MESSAGE value=\"Fixed sams stupid error part 101\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Fixed sams stupid error part 101\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision ec0219d306f21adbd735318be6d10313b473a927)
++++ b/.idea/workspace.xml	(date 1636846891350)
+@@ -4,13 +4,9 @@
+     <option name="autoReloadType" value="SELECTIVE" />
+   </component>
+   <component name="ChangeListManager">
+-    <list default="true" id="a13c6f2e-c22b-4cac-9332-68ad4f3f8b43" name="Changes" comment="Fixed sams stupid error part 102">
+-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
++    <list default="true" id="8c3fdb8e-701d-4bcc-9087-779ad6372228" name="Changes" comment="Added comments xx">
+       <change beforePath="$PROJECT_DIR$/src/BackEnd.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/ListenSocCraft.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ListenSocCraft.java" afterDir="false" />
+       <change beforePath="$PROJECT_DIR$/src/Receive.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Receive.java" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/target/classes/BackEnd.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/BackEnd.class" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/target/classes/Receive.class" beforeDir="false" afterPath="$PROJECT_DIR$/target/classes/Receive.class" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
+@@ -56,6 +52,11 @@
+     <property name="project.structure.proportion" value="0.15" />
+     <property name="project.structure.side.proportion" value="0.2" />
+     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
++  </component>
++  <component name="Push.Settings">
++    <force-push-targets>
++      <force-push-target remote-path="origin" branch="main" />
++    </force-push-targets>
+   </component>
+   <component name="RecentsManager">
+     <key name="MoveFile.RECENT_KEYS">

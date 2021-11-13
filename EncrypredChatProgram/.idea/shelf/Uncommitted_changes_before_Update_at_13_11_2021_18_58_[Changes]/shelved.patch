@@ -1,0 +1,110 @@
+Index: src/ListenSocCraft.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>public class ListenSocCraft extends Thread{\r\n\r\n\r\n\r\n  public void run(){\r\n\r\n  }\r\n}\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/ListenSocCraft.java b/src/ListenSocCraft.java
+--- a/src/ListenSocCraft.java	(revision 7991e23a87d06f7f210bc708a0dedb1054d276e4)
++++ b/src/ListenSocCraft.java	(date 1636829275201)
+@@ -1,8 +1,29 @@
++import java.io.IOException;
++import java.net.ServerSocket;
++import java.net.Socket;
++import java.util.ArrayList;
++
+ public class ListenSocCraft extends Thread{
++  private ServerSocket servSoc;
++  private ArrayList<Socket> socketArray;
+ 
+ 
++
++  public ListenSocCraft(ServerSocket servSoc, ArrayList<Socket> arrList ){
++    this.socketArray = arrList;
++    this.servSoc = servSoc;
++  }
+ 
+   public void run(){
++    while(true){
++      try {
++        Socket newSoc = servSoc.accept();
++
++      } catch (IOException e) {
++        e.printStackTrace();
++      }
+ 
++
++    }
+   }
+ }
+Index: src/Receive.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import java.io.DataInputStream;\r\nimport java.io.IOException;\r\nimport java.net.Socket;\r\nimport java.util.Stack;\r\nimport javax.xml.crypto.Data;\r\n\r\npublic class Receive extends Thread {\r\n  private Socket clientSocket;\r\n  private DataInputStream input;\r\n  private String currentMessage = null;\r\n  private Stack<String> messageStack;\r\n\r\n  public Receive(Socket sock) throws IOException {\r\n    clientSocket = sock;\r\n    input = new DataInputStream(sock.getInputStream());\r\n  }\r\n\r\n\r\n  public Stack<String> getStack(){\r\n    return messageStack;\r\n  }\r\n\r\n\r\n\r\n  public void run() {\r\n    while (true) {\r\n\r\n      try {\r\n\r\n        currentMessage = input.readUTF();\r\n\r\n        if(currentMessage == null){\r\n\r\n        }else{\r\n          messageStack.push(currentMessage);\r\n        }\r\n\r\n      } catch (IOException e) {\r\n        e.printStackTrace();\r\n      }\r\n\r\n\r\n    }\r\n\r\n  }\r\n\r\n\r\n}\r\n\r\n\r\n
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Receive.java b/src/Receive.java
+--- a/src/Receive.java	(revision 7991e23a87d06f7f210bc708a0dedb1054d276e4)
++++ b/src/Receive.java	(date 1636829900930)
+@@ -4,24 +4,37 @@
+ import java.util.Stack;
+ import javax.xml.crypto.Data;
+ 
++
++/**
++ * class is a thread that is run for each connection that is made.
++ * It listens for incoming messages and saves them in a socket
++ */
++
+ public class Receive extends Thread {
+   private Socket clientSocket;
+   private DataInputStream input;
+   private String currentMessage = null;
+   private Stack<String> messageStack;
+ 
++  /**
++  * Constructior taks a socket
++   * */
+   public Receive(Socket sock) throws IOException {
+     clientSocket = sock;
+     input = new DataInputStream(sock.getInputStream());
+   }
+ 
+-
++  /**
++  * Getter grabs socket stack
++   */
+   public Stack<String> getStack(){
+     return messageStack;
+   }
+ 
+ 
+-
++  /**
++  * Method runs repetedly due to loop. It listens for a message and will save it in the stack
++   */
+   public void run() {
+     while (true) {
+ 
+Index: .idea/workspace.xml
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+><?xml version=\"1.0\" encoding=\"UTF-8\"?>\r\n<project version=\"4\">\r\n  <component name=\"AutoImportSettings\">\r\n    <option name=\"autoReloadType\" value=\"SELECTIVE\" />\r\n  </component>\r\n  <component name=\"ChangeListManager\">\r\n    <list default=\"true\" id=\"a13c6f2e-c22b-4cac-9332-68ad4f3f8b43\" name=\"Changes\" comment=\"Added a socket Listner thread class that accepts new connections from peaople\">\r\n      <change beforePath=\"$PROJECT_DIR$/.idea/workspace.xml\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/.idea/workspace.xml\" afterDir=\"false\" />\r\n      <change beforePath=\"$PROJECT_DIR$/src/BackEnd.java\" beforeDir=\"false\" afterPath=\"$PROJECT_DIR$/src/BackEnd.java\" afterDir=\"false\" />\r\n    </list>\r\n    <option name=\"SHOW_DIALOG\" value=\"false\" />\r\n    <option name=\"HIGHLIGHT_CONFLICTS\" value=\"true\" />\r\n    <option name=\"HIGHLIGHT_NON_ACTIVE_CHANGELIST\" value=\"false\" />\r\n    <option name=\"LAST_RESOLUTION\" value=\"IGNORE\" />\r\n  </component>\r\n  <component name=\"FileTemplateManagerImpl\">\r\n    <option name=\"RECENT_TEMPLATES\">\r\n      <list>\r\n        <option value=\"Class\" />\r\n      </list>\r\n    </option>\r\n  </component>\r\n  <component name=\"Git.Settings\">\r\n    <option name=\"RECENT_GIT_ROOT_PATH\" value=\"$PROJECT_DIR$/..\" />\r\n  </component>\r\n  <component name=\"GitSEFilterConfiguration\">\r\n    <file-type-list>\r\n      <filtered-out-file-type name=\"LOCAL_BRANCH\" />\r\n      <filtered-out-file-type name=\"REMOTE_BRANCH\" />\r\n      <filtered-out-file-type name=\"TAG\" />\r\n      <filtered-out-file-type name=\"COMMIT_BY_MESSAGE\" />\r\n    </file-type-list>\r\n  </component>\r\n  <component name=\"ProjectId\" id=\"20ro5xU6be81pzpalPlYxSrBYlJ\" />\r\n  <component name=\"ProjectLevelVcsManager\" settingsEditedManually=\"true\" />\r\n  <component name=\"ProjectViewState\">\r\n    <option name=\"hideEmptyMiddlePackages\" value=\"true\" />\r\n    <option name=\"showLibraryContents\" value=\"true\" />\r\n    <option name=\"showMembers\" value=\"true\" />\r\n    <option name=\"showVisibilityIcons\" value=\"true\" />\r\n  </component>\r\n  <component name=\"PropertiesComponent\">\r\n    <property name=\"Downloaded.Files.Path.Enabled\" value=\"false\" />\r\n    <property name=\"Repository.Attach.Annotations\" value=\"false\" />\r\n    <property name=\"Repository.Attach.JavaDocs\" value=\"false\" />\r\n    <property name=\"Repository.Attach.Sources\" value=\"false\" />\r\n    <property name=\"RunOnceActivity.OpenProjectViewOnStart\" value=\"true\" />\r\n    <property name=\"RunOnceActivity.ShowReadmeOnStart\" value=\"true\" />\r\n    <property name=\"SHARE_PROJECT_CONFIGURATION_FILES\" value=\"true\" />\r\n    <property name=\"last_opened_file_path\" value=\"$PROJECT_DIR$\" />\r\n    <property name=\"project.structure.last.edited\" value=\"Libraries\" />\r\n    <property name=\"project.structure.proportion\" value=\"0.15\" />\r\n    <property name=\"project.structure.side.proportion\" value=\"0.2\" />\r\n  </component>\r\n  <component name=\"RecentsManager\">\r\n    <key name=\"MoveFile.RECENT_KEYS\">\r\n      <recent name=\"C:\\Users\\dylan\\Documents\\GitHub\\EndToEndEncryptedChat\\EncrypredChatProgram\\src\" />\r\n    </key>\r\n  </component>\r\n  <component name=\"SpellCheckerSettings\" RuntimeDictionaries=\"0\" Folders=\"0\" CustomDictionaries=\"0\" DefaultDictionary=\"application-level\" UseSingleDictionary=\"true\" transferred=\"true\" />\r\n  <component name=\"TaskManager\">\r\n    <task active=\"true\" id=\"Default\" summary=\"Default task\">\r\n      <changelist id=\"a13c6f2e-c22b-4cac-9332-68ad4f3f8b43\" name=\"Changes\" comment=\"\" />\r\n      <created>1636811888084</created>\r\n      <option name=\"number\" value=\"Default\" />\r\n      <option name=\"presentableId\" value=\"Default\" />\r\n      <updated>1636811888084</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00001\" summary=\"Added main method\">\r\n      <created>1636812864282</created>\r\n      <option name=\"number\" value=\"00001\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00001\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1636812864282</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00002\" summary=\"Created basic send class with a constructor that takes the socket in and initialises an output stream, and a method that sends a message through the output stream.\">\r\n      <created>1636814719297</created>\r\n      <option name=\"number\" value=\"00002\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00002\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1636814719297</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00003\" summary=\"Fixed sams stupid error\">\r\n      <created>1636819192866</created>\r\n      <option name=\"number\" value=\"00003\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00003\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1636819192866</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00004\" summary=\"Fixed sams stupid error pt2\">\r\n      <created>1636819494867</created>\r\n      <option name=\"number\" value=\"00004\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00004\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1636819494867</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00005\" summary=\"Fixed sams stupid error pt3\">\r\n      <created>1636822320541</created>\r\n      <option name=\"number\" value=\"00005\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00005\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1636822320541</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00006\" summary=\"Added thread into  recever class that grabs messages and stores them in a stack.\">\r\n      <created>1636825320187</created>\r\n      <option name=\"number\" value=\"00006\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00006\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1636825320187</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00007\" summary=\"Added a socket Listner thread class that accepts new connections from peaople\">\r\n      <created>1636826274799</created>\r\n      <option name=\"number\" value=\"00007\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00007\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1636826274799</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00008\" summary=\"Added a socket Listner thread class that accepts new connections from peaople\">\r\n      <created>1636826429454</created>\r\n      <option name=\"number\" value=\"00008\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00008\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1636826429454</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00009\" summary=\"Added a socket Listner thread class that accepts new connections from peaople\">\r\n      <created>1636826665290</created>\r\n      <option name=\"number\" value=\"00009\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00009\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1636826665290</updated>\r\n    </task>\r\n    <task id=\"LOCAL-00010\" summary=\"Added a socket Listner thread class that accepts new connections from peaople\">\r\n      <created>1636826734431</created>\r\n      <option name=\"number\" value=\"00010\" />\r\n      <option name=\"presentableId\" value=\"LOCAL-00010\" />\r\n      <option name=\"project\" value=\"LOCAL\" />\r\n      <updated>1636826734431</updated>\r\n    </task>\r\n    <option name=\"localTasksCounter\" value=\"11\" />\r\n    <servers />\r\n  </component>\r\n  <component name=\"Vcs.Log.Tabs.Properties\">\r\n    <option name=\"TAB_STATES\">\r\n      <map>\r\n        <entry key=\"MAIN\">\r\n          <value>\r\n            <State />\r\n          </value>\r\n        </entry>\r\n      </map>\r\n    </option>\r\n    <option name=\"oldMeFiltersMigrated\" value=\"true\" />\r\n  </component>\r\n  <component name=\"VcsManagerConfiguration\">\r\n    <MESSAGE value=\"Added main method\" />\r\n    <MESSAGE value=\"Created basic send class with a constructor that takes the socket in and initialises an output stream, and a method that sends a message through the output stream.\" />\r\n    <MESSAGE value=\"Fixed sams stupid error\" />\r\n    <MESSAGE value=\"Fixed sams stupid error pt2\" />\r\n    <MESSAGE value=\"Fixed sams stupid error pt3\" />\r\n    <MESSAGE value=\"Added a socket Listner thread class that accepts new connections from peaople\" />\r\n    <option name=\"LAST_COMMIT_MESSAGE\" value=\"Added a socket Listner thread class that accepts new connections from peaople\" />\r\n  </component>\r\n</project>
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/.idea/workspace.xml b/.idea/workspace.xml
+--- a/.idea/workspace.xml	(revision 7991e23a87d06f7f210bc708a0dedb1054d276e4)
++++ b/.idea/workspace.xml	(date 1636829275564)
+@@ -6,7 +6,8 @@
+   <component name="ChangeListManager">
+     <list default="true" id="a13c6f2e-c22b-4cac-9332-68ad4f3f8b43" name="Changes" comment="Added a socket Listner thread class that accepts new connections from peaople">
+       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+-      <change beforePath="$PROJECT_DIR$/src/BackEnd.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/ListenSocCraft.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/ListenSocCraft.java" afterDir="false" />
++      <change beforePath="$PROJECT_DIR$/src/Receive.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Receive.java" afterDir="false" />
+     </list>
+     <option name="SHOW_DIALOG" value="false" />
+     <option name="HIGHLIGHT_CONFLICTS" value="true" />
