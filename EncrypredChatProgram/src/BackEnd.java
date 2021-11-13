@@ -11,7 +11,7 @@ import java.util.TimerTask;
 public class BackEnd {
   private ArrayList<Socket> sockArray = new ArrayList<>();
   private ArrayList<Send> senderArray = new ArrayList<>();
-
+  private ArrayList<Receive> receiverArray = new ArrayList<>();
 
   public static void main(String[] args) throws IOException {
     BackEnd back = new BackEnd();
@@ -36,7 +36,7 @@ public class BackEnd {
     System.out.println("Please enter a port you want open");
     int openPort = scan.nextInt();
     ServerSocket sSoc = new ServerSocket(openPort);
-    ListenSocCraft lSoc = new ListenSocCraft(sSoc,sockArray); //add server socket
+    ListenSocCraft lSoc = new ListenSocCraft(sSoc,sockArray,senderArray); //add server socket
     lSoc.start();
 
     Timer timer = new Timer();
