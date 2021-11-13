@@ -27,7 +27,7 @@ public class BackEnd {
     Send initMsg = new Send(socket);
     System.out.println("Please enter your desired username");
     String uName = scan.nextLine();
-    initMsg.send("INIT::"+uName);
+    initMsg.send("INIT::"+uName); // remove dogshit code
     //Receive list of sockets
 
 
