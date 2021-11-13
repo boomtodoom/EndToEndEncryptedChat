@@ -1,6 +1,7 @@
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.net.Socket;
+import java.util.Queue;
 import java.util.Stack;
 import javax.xml.crypto.Data;
 
@@ -14,7 +15,7 @@ public class Receive extends Thread {
   private Socket clientSocket;
   private DataInputStream input;
   private String currentMessage = null;
-  private Stack<String> messageStack;
+  private Queue<String> messageQueue;
 
   /**
   * Constructior taks a socket
@@ -27,8 +28,8 @@ public class Receive extends Thread {
   /**
   * Getter grabs socket stack
    */
-  public Stack<String> getStack(){
-    return messageStack;
+  public Queue<String> getQueue(){
+    return messageQueue;
   }
 
 
@@ -45,7 +46,8 @@ public class Receive extends Thread {
         if(currentMessage == null){
 
         }else{
-          messageStack.push(currentMessage);
+          messageQueue.add(currentMessage);
+          // RESET MESSAGE TO NULL
         }
 
       } catch (IOException e) {
