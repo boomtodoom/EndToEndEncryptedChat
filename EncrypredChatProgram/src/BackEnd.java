@@ -8,6 +8,9 @@ public class BackEnd {
 
   public static void main(String[] args){
     Scanner scan = new Scanner(System.in);
+    System.out.println("Please enter the ip you wish to connect to: ");
+    String ip = scan.nextLine();
+
 
   }
 }

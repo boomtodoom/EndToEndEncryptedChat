@@ -9,5 +9,11 @@
     <orderEntry type="sourceFolder" forTests="false" />
     <orderEntry type="library" name="spring.web" level="project" />
     <orderEntry type="library" name="spring.webmvc" level="project" />
+    <orderEntry type="library" name="spring.orm" level="project" />
+    <orderEntry type="library" name="spring.mock" level="project" />
+    <orderEntry type="library" name="spring.dao" level="project" />
+    <orderEntry type="library" name="spring.core" level="project" />
+    <orderEntry type="library" name="spring.context" level="project" />
+    <orderEntry type="library" name="spring.aop" level="project" />
   </component>
 </module>
