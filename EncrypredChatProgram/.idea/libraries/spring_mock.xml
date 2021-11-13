@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="spring.mock" type="repository">
+    <properties maven-id="spring:spring-mock:1.0.2" />
+    <CLASSES>
+      <root url="jar://$MAVEN_REPOSITORY$/spring/spring-mock/1.0.2/spring-mock-1.0.2.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

@@ -14,6 +14,7 @@ public class BackEnd {
     System.out.println("Please enter the port you wish to connect to: ");
     int port = scan.nextInt();
     Socket socket = new Socket(ip,port);
+    socket.
     Send initMsg = new Send(socket);
     System.out.println("Please enter your desired username");
     String uName = scan.nextLine();
