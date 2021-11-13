@@ -7,5 +7,7 @@
     </content>
     <orderEntry type="jdk" jdkName="openjdk-17" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="spring.web" level="project" />
+    <orderEntry type="library" name="spring.webmvc" level="project" />
   </component>
 </module>
