@@ -27,6 +27,7 @@ public class Send {
    */
   void send(String msg) throws IOException {
     message=msg;
+
     output.writeUTF(message);
   }
 }
