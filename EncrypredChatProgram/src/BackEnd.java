@@ -34,8 +34,8 @@ public class BackEnd {
     System.out.println("Please enter a port you want open");
     int openPort = scan.nextInt();
     ServerSocket sSoc = new ServerSocket(openPort);
-    ListenSocCraft lSoc = new ListenSocCraft(); //add server socket
-    lSoc.run();
+    ListenSocCraft lSoc = new ListenSocCraft(sSoc,sockArray); //add server socket
+    lSoc.start();
 
     /**
      * Loops infinitely checking for the users message and then sending them to all connected clients
