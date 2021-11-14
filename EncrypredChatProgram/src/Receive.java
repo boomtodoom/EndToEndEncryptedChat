@@ -58,6 +58,7 @@ public class Receive extends Thread {
               Socket sock = new Socket(InetAddress.getByName(splitMsg[0]),Integer.valueOf(splitMsg[1]));
               msgCount++;
               currentMessage=input.readUTF();
+              System.out.println("hi");
             }
           }
           messageQueue.add(currentMessage);
