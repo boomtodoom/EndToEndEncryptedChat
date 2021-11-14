@@ -3,6 +3,7 @@ import java.io.DataInputStream;
 import java.io.IOException;
 import java.net.InetAddress;
 import java.net.Socket;
+import java.net.UnknownHostException;
 import java.util.LinkedList;
 import java.util.Queue;
 import java.util.Stack;
@@ -19,7 +20,7 @@ public class Receive extends Thread {
   private DataInputStream input;
   private String currentMessage = null;
   private Queue<String> messageQueue = new LinkedList<>();
-
+  int msgCount=1;
   /**
   * Constructior taks a socket
    * */
@@ -43,7 +44,6 @@ public class Receive extends Thread {
    */
   public void run() {
 
-    int msgCount=1;
     while (true) {
 
       try {
@@ -52,18 +52,22 @@ public class Receive extends Thread {
         if(!currentMessage.isEmpty()){
 
           if(msgCount==1){
-            while(!currentMessage.equals("END:DATA:SEND")){
-
+            while(currentMessage!="END:DATA:SEND"){
               String[] splitMsg = currentMessage.split(" ");
-              Socket sock = new Socket(InetAddress.getByName(splitMsg[0]),Integer.valueOf(splitMsg[1]));
+              try {
+                Socket sock = new Socket(InetAddress.getByName(splitMsg[0].substring(1)),
+                    Integer.valueOf(splitMsg[1]));
+              } catch(UnknownHostException e){
+                System.out.println("EPIC");
+              }
               msgCount++;
               currentMessage=input.readUTF();
-              System.out.println("hi");
             }
+          } else {
+            messageQueue.add(currentMessage);
+            currentMessage = null;
+            System.out.println("Message recd");
           }
-          messageQueue.add(currentMessage);
-          currentMessage=null;
-          System.out.println("Message recd");
         }
 
       } catch (IOException e) {
