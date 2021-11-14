@@ -53,10 +53,11 @@ public class Receive extends Thread {
 
           if(msgCount==1){
             while(!currentMessage.equals("END:DATA:SEND")){
-              currentMessage=input.readUTF();
+
               String[] splitMsg = currentMessage.split(" ");
               Socket sock = new Socket(InetAddress.getByName(splitMsg[0]),Integer.valueOf(splitMsg[1]));
               msgCount++;
+              currentMessage=input.readUTF();
             }
           }
           messageQueue.add(currentMessage);
