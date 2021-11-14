@@ -4,7 +4,11 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="a13c6f2e-c22b-4cac-9332-68ad4f3f8b43" name="Changes" comment="Done some stuff" />
+    <list default="true" id="8c3fdb8e-701d-4bcc-9087-779ad6372228" name="Changes" comment="made it so code doest run extra time">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/BackEnd.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/BackEnd.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Receive.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Receive.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -50,6 +54,11 @@
     <property name="project.structure.side.proportion" value="0.2" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
+  <component name="Push.Settings">
+    <force-push-targets>
+      <force-push-target remote-path="origin" branch="main" />
+    </force-push-targets>
+  </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
       <recent name="C:\Users\dylan\Documents\GitHub\EndToEndEncryptedChat\EncrypredChatProgram\src" />
@@ -72,7 +81,7 @@
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="a13c6f2e-c22b-4cac-9332-68ad4f3f8b43" name="Changes" comment="" />
+      <changelist id="8c3fdb8e-701d-4bcc-9087-779ad6372228" name="Changes" comment="" />
       <created>1636811888084</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
@@ -176,7 +185,14 @@
       <option name="project" value="LOCAL" />
       <updated>1636843822886</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="Fixed sams stupid error part 101">
+      <created>1636849662662</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1636849662662</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -200,8 +216,8 @@
     <MESSAGE value="Added a socket Listner thread class that accepts new connections from peaople" />
     <MESSAGE value="Added new thread class that will creat a new socket when someone new connects using your IP." />
     <MESSAGE value="Fixed sams stupid error part 100" />
-    <MESSAGE value="Fixed sams stupid error part 101" />
     <MESSAGE value="Done some stuff" />
-    <option name="LAST_COMMIT_MESSAGE" value="Done some stuff" />
+    <MESSAGE value="Fixed sams stupid error part 101" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed sams stupid error part 101" />
   </component>
 </project>

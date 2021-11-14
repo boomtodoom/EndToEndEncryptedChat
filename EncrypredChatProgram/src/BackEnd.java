@@ -63,6 +63,7 @@ public class BackEnd {
         senderArray =  lSoc.getSendArray();
         receiverArray =  lSoc.getRecArray();
         //messageQueue = rec.getQueue();
+
         for(Receive receiver:receiverArray){
           for(String msg:receiver.getQueue()){
             System.out.println(msg);
