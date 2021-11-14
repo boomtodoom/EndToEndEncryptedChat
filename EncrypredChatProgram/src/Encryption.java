@@ -10,7 +10,7 @@ public class Encryption {
 
     protected static PrivateKey personalPrKey;
     protected static PublicKey personalPbKey;
-    protected static List <PublicKey> listOfPublicKeys = new ArrayList<PublicKey>();
+    protected static List<PublicKey> listOfPublicKeys = new ArrayList<PublicKey>();
 
     //generates public and private key
     void generateKeyPair() throws NoSuchAlgorithmException {
@@ -21,28 +21,28 @@ public class Encryption {
         personalPrKey = pair.getPrivate();
     }
 
-    PublicKey getPersonalPublicKey(){
+    PublicKey getPersonalPublicKey() {
         return personalPbKey;
     }
 
-    PrivateKey getPersonalPrivateKey(){
+    PrivateKey getPersonalPrivateKey() {
         return personalPrKey;
     }
 
-    void storePublicKey(PublicKey pbkey){
+    void storePublicKey(PublicKey pbkey) {
         listOfPublicKeys.add(pbkey);
     }
 
-    void storePublicKeys(List<PublicKey> pbkeys){
-        for (PublicKey pbk: pbkeys){
+    void storePublicKeys(List<PublicKey> pbkeys) {
+        for (PublicKey pbk : pbkeys) {
             listOfPublicKeys.add(pbk);
         }
     }
     // WARNING: How does the userID come into play here?
     // How does user know what keys to take out once a user leaves?
 
-    boolean removePublicKey(PublicKey pbkey){
-        if(!listOfPublicKeys.isEmpty()){
+    boolean removePublicKey(PublicKey pbkey) {
+        if (!listOfPublicKeys.isEmpty()) {
             //continue to remove
             listOfPublicKeys.remove(pbkey);
             return true;
@@ -55,7 +55,7 @@ public class Encryption {
     byte[] encryptMessage(byte[] encodedMessage, PublicKey pbkey) throws
             NoSuchAlgorithmException, NoSuchPaddingException,
             InvalidKeyException, IllegalBlockSizeException, BadPaddingException {
-        if ((personalPbKey == null) || (personalPrKey == null)){
+        if ((personalPbKey == null) || (personalPrKey == null)) {
             generateKeyPair();
         }
 
@@ -70,3 +70,4 @@ public class Encryption {
         cipher.init(Cipher.DECRYPT_MODE, prkey);
         return cipher.doFinal(encodedMessage);
     }
+}
